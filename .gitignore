@@ -1,0 +1,52 @@
+# Node dependencies
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Logs
+logs/
+*.log
+*.out
+*.pid
+
+# Build and production
+dist/
+build/
+tmp/
+temp/
+.cache/
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Coverage
+coverage/
+
+# IDE & system files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# React Native cache
+.expo/
+
+# MongoDB local database dumps
+dump/
+
+# Misc
+*.tgz
+*.gz
+*.zip
+
+# OS-specific
+ehthumbs.db
+Desktop.ini
+
+# Optional: if using parcel or other bundlers
+.parcel-cache/
