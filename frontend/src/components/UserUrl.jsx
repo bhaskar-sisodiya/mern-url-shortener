@@ -59,7 +59,7 @@ const UserUrl = () => {
                     rel="noopener noreferrer"
                     className="text-blue-600 hover:text-blue-900 hover:underline"
                   >
-                    {`localhost:3000/${url.short_url}`}
+                    {`${import.meta.env.VITE_BASE_URL}/${url.short_url}`}
                   </a>
                 </td>
                 <td className="px-6 py-4">{url.clicks}</td>
@@ -105,7 +105,7 @@ const UserUrl = () => {
                   rel="noopener noreferrer"
                   className="text-blue-600 hover:text-blue-900 text-sm truncate block"
                 >
-                  {`localhost:3000/${url.short_url}`}
+                  {`${import.meta.env.VITE_BASE_URL}/${url.short_url}`}
                 </a>
               </div>
               <div>
