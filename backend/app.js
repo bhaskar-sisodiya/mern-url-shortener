@@ -14,7 +14,7 @@ dotenv.config();
 
 const app = express();
 
-// CORS setup for Netlify frontend
+// CORS setup
 app.use(cors({
   origin: process.env.CLIENT_URL || "http://localhost:5173",
   credentials: true
@@ -30,20 +30,36 @@ app.use("/api/user", user_routes);
 app.use("/api/auth", auth_routes);
 app.use("/api/create", short_url);
 
+// Base route
 app.get("/", (req, res) => {
   res.status(200).json({ message: "API is running 🚀" });
 });
 
-// Short URL redirection
+// Short URL redirect
 app.get("/:id", redirectFromShortUrl);
 
 // Error handler
 app.use(errorHandler);
 
-// Dynamic port for Railway
+// Dynamic port
 const PORT = process.env.PORT || 3000;
 
-app.listen(PORT, async () => {
-  await connectDB();
-  console.log(`🚀 Server running in ${process.env.NODE_ENV} mode on port ${PORT}`);
-});
+// Connect DB first, then start server
+const startServer = async () => {
+  if (!process.env.MONGO_URI) {
+    console.error("Error: MONGO_URI is not defined! Set it in Railway environment variables.");
+    process.exit(1);
+  }
+
+  try {
+    await connectDB();
+    app.listen(PORT, () => {
+      console.log(`🚀 Server running in ${process.env.NODE_ENV || "development"} mode on port ${PORT}`);
+    });
+  } catch (err) {
+    console.error("Failed to connect to MongoDB:", err);
+    process.exit(1);
+  }
+};
+
+startServer();
