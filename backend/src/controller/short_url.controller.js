@@ -1,3 +1,5 @@
+// src/controller/short_url.controller.js
+
 import { getShortUrl } from "../dao/short_url.js";
 import { createShortUrlWithoutUser, createShortUrlWithUser } from "../services/short_url.service.js";
 import wrapAsync from "../utils/tryCatchWrapper.js";
@@ -12,7 +14,7 @@ export const createShortUrl = wrapAsync(async (req, res) => {
     shortUrl = await createShortUrlWithoutUser(data.url);
   }
   
-  res.status(200).json({shortUrl: process.env.APP_URL + '/' + shortUrl});
+  res.status(200).json({shortUrl: `${process.env.APP_URL}/${shortUrl}`});
 });
 
 export const redirectFromShortUrl = wrapAsync(async (req, res, next) => {
@@ -25,5 +27,5 @@ export const redirectFromShortUrl = wrapAsync(async (req, res, next) => {
 export const createCustomShortUrl = wrapAsync(async (req, res) => {
   const {url, slug} = req.body;
   const shortUrl = await createShortUrlWithoutUser(url, customUrl);
-  res.status(200).json({shortUrl: process.env.APP_URL + '/' + shortUrl});
+  res.status(200).json({shortUrl: `${process.env.APP_URL}/${shortUrl}`});
 })
